@@ -1,0 +1,44 @@
+form{
+    display: flex;
+    justify-content: center;
+    .search-box{
+        position: relative;
+        width: clamp(30vw,20rem,50vw);
+        display: flex;
+        flex-direction: column;
+        perspective: 1rem;
+        &:focus-within{
+            .search-options:not(.empty){
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        .search-options{
+            transform-style: preserve-3d;
+            transform-origin: top;
+            transform: rotateX(-90deg);
+            opacity: 0;
+            transition-duration: 300ms;
+            transition-timing-function: ease-in-out;
+            background-color: #fff  ;
+            margin:0;
+            padding:0;
+            z-index: 10;
+            list-style: none;
+            top: 100%;
+            width:100%;
+            position: absolute;
+            border: 1px solid black;
+            li{
+                padding:0.7rem;
+                a{
+                    color:#000;
+                    text-decoration: none;
+                }
+            }
+            *:not(:last-child){
+                border-bottom: 1px solid black;
+            }
+        }      
+    }
+}

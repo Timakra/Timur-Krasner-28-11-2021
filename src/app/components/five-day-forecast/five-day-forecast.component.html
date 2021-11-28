@@ -1,0 +1,16 @@
+<h2>
+    {{location.name}} 
+    <a href="#" (click)="toggleFavorites()">
+        <img class="icon" src="\assets\feature-icons\not-fav.png" alt="" srcset="" *ngIf="!locationIsFav">
+        <img class="icon" src="\assets\feature-icons\fav.png" alt="" srcset="" *ngIf="locationIsFav">
+    </a>
+</h2>
+
+<div *ngIf="loading">Loading</div>
+
+<div class="card-grid">
+    <div *ngFor="let forecast of fiveDayForecast">
+        {{forecast.date | date:'EEEE'}}
+        <app-daily-forecast-card [forecast]="forecast" ></app-daily-forecast-card>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<form (submit)="searchLocation($event)">
+    <div class="search-box">
+        <input autocomplete="off" type="text" name="search" [formControl]="search">
+        <ul class="search-options" [class.empty]="!currentQueryResults.length">
+            <li (click)="selectLocation(location)"  *ngFor="let location of currentQueryResults">
+                <a href="#">
+                    {{location.name}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</form>

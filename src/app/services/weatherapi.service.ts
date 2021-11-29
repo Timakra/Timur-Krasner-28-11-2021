@@ -17,7 +17,46 @@ export class WeatherapiService {
     private http : HttpClient
     ){}
 
-  
+  getCurrentWeather(id:string){
+    return of([
+      {
+        "LocalObservationDateTime": "2021-11-29T10:41:00+02:00",
+        "EpochTime": 1638175260,
+        "WeatherText": "Mostly sunny",
+        "WeatherIcon": 2,
+        "HasPrecipitation": false,
+        "PrecipitationType": null,
+        "IsDayTime": true,
+        "Temperature": {
+          "Metric": {
+            "Value": 23.9,
+            "Unit": "C",
+            "UnitType": 17
+          },
+          "Imperial": {
+            "Value": 75,
+            "Unit": "F",
+            "UnitType": 18
+          }
+        },
+        "MobileLink": "http://www.accuweather.com/en/il/tel-aviv/215854/current-weather/215854?lang=en-us",
+        "Link": "http://www.accuweather.com/en/il/tel-aviv/215854/current-weather/215854?lang=en-us"
+      }
+    ]).pipe(
+      map((res):Forecast=>{
+        let forecastData = res[0];
+        return {
+          date: Date.now().toString(),
+          icon: forecastData.WeatherIcon,
+          iconPhrase : forecastData.WeatherText,
+          tempMax: forecastData.Temperature.Metric.Value,
+          tempMin: forecastData.Temperature.Metric.Value
+        }
+      })
+    )
+    //return this.http.get(`${this.baseUrl}/currentconditions/v1  /${id}?apikey=${this.apiKey}`)
+
+  }
 
   getWeatherFiveDayForecast( id:string ){
     return of({
@@ -196,21 +235,15 @@ export class WeatherapiService {
         return forecast.DailyForecasts.map((dailyForecast:any):Forecast=>{
           return {
             date:dailyForecast.Date,
-            day:{
-              icon: dailyForecast.Day.Icon ,
-              iconPhrase:dailyForecast.Day.IconPhrase,
-            } ,
-            night:{
-              icon: dailyForecast.Night.Icon ,
-              iconPhrase:dailyForecast.Night.IconPhrase,
-            },
+            icon: dailyForecast.Day.Icon ,
+            iconPhrase:dailyForecast.Day.IconPhrase,
             tempMin: dailyForecast.Temperature.Minimum.Value,
             tempMax: dailyForecast.Temperature.Maximum.Value,
           }
       })
       })
   )
-    //return this.http.get(`${this.baseUrl}/forecasts/v1/daily/5day/?apikey=${this.apiKey}&q=${query}`)
+    //return this.http.get(`${this.baseUrl}/forecasts/v1/daily/5day/${id}?apikey=${this.apiKey}`)
   }
 
   getAutoComplete(query: string) :Observable<any>{
@@ -366,6 +399,7 @@ export class WeatherapiService {
         }
       }
     ])// mock response
+    
     // return this.http.get(`${this.baseUrl}/locations/v1/cities/autocomplete?apikey=${this.apiKey}&q=${query}`)
   }
 

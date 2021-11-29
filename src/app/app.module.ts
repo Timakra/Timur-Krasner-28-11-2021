@@ -5,13 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
-// Material
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
+//Pipes
+import { TemperaturePipe } from './pipes/tempeture.pipe'
 //Store
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './state/reducers';
@@ -34,20 +29,19 @@ import { FavCardComponent } from './components/fav-card/fav-card.component';
     FavoriteLocationsComponent,
     HomeComponent,
     FiveDayForecastComponent,
-    FavCardComponent
+    FavCardComponent,
+    TemperaturePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
+
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    BrowserAnimationsModule,
-    MatAutocompleteModule,
-    MatInputModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

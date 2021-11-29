@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { WeatherapiService } from 'src/app/services/weatherapi.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { WeatherLocation } from 'src/app/models/weather.model';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 import { changeSelectedLocation } from './../../state/actions/weather.actions'
 import { Store } from '@ngrx/store';
@@ -13,12 +13,14 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  @ViewChild('searchBox') searchBox!: ElementRef;
+
   constructor(
     private weatherApi : WeatherapiService,
     private fb : FormBuilder,
     private store: Store
     ) { }
-  
+    
   currentQueryString : string = '';
   currentQueryResults : WeatherLocation[] = [];
 
@@ -62,8 +64,15 @@ export class SearchComponent implements OnInit {
   }
 
   selectLocation(location:WeatherLocation){
+    console.log('click' , location)
     this.store.dispatch(changeSelectedLocation(location))
     this.search.setValue(location.name);
+    //Unfocus
+    var tmp = document.createElement("input");
+    document.body.appendChild(tmp);
+    tmp.focus();
+    document.body.removeChild(tmp);
+  
   }
 
   displayLocationName(location: WeatherLocation): string {

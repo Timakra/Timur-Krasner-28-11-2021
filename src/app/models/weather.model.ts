@@ -5,14 +5,8 @@ export interface WeatherLocation {
 
 export interface Forecast {
     date:string,
-    day: {
-        icon:number,
-        iconPhrase: string
-    },
-    night:{
-        icon:number,
-        iconPhrase: string
-    },
+    icon:number,
+    iconPhrase: string
     tempMin: number,
     tempMax: number,
 }

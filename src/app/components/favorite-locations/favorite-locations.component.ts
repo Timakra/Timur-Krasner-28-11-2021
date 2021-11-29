@@ -9,7 +9,7 @@ import { selectFavorites } from 'src/app/state/reducers/weather.reducer';
   styleUrls: ['./favorite-locations.component.scss']
 })
 export class FavoriteLocationsComponent implements OnInit {
-  favorites : string[] = [];
+  favorites : WeatherLocation[] = [];
   constructor(private store :Store) { 
   }
 

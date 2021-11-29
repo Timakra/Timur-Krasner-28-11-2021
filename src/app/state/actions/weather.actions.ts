@@ -16,3 +16,6 @@ export const changeSelectedLocation = createAction(
     "[Weather] Changed Selected Location",
     props<WeatherLocation>()
 );
+export const switchUnit = createAction(
+    "[Weather] Switch Temputere unit"
+);

@@ -16,7 +16,7 @@ form{
         .search-options{
             transform-style: preserve-3d;
             transform-origin: top;
-            transform: rotateX(-90deg);
+            transform: rotateX(-55deg);
             opacity: 0;
             transition-duration: 300ms;
             transition-timing-function: ease-in-out;
@@ -30,6 +30,7 @@ form{
             position: absolute;
             border: 1px solid black;
             li{
+                cursor: pointer;
                 padding:0.7rem;
                 a{
                     color:#000;

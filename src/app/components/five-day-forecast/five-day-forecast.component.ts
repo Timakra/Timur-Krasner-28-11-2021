@@ -32,7 +32,15 @@ export class FiveDayForecastComponent implements OnInit {
       
       // Checks if location is in Favorites
       this.store.select(selectFavorites).subscribe((favs)=>{
-        this.locationIsFav = favs.includes(this.location.id);
+        for(let loc of favs){
+          if(loc.id === this.location.id){
+            this.locationIsFav = true;;
+            return;
+          }
+        }
+        //if its none of the favorite locations
+        this.locationIsFav = false;
+        
       })
     })
 

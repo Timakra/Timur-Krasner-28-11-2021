@@ -50,3 +50,12 @@ export const selectWeather = createFeatureSelector<State>('weather');
 export const selectSelectedLocation = createSelector(selectWeather,(state:State)=>state.selectedLocation);
 export const selectTempUnit = createSelector(selectWeather,(state:State)=>state.tempUnit);
 export const selectFavorites = createSelector(selectWeather,(state:State)=>state.favorites);
+export const isInFavorites = (id:string) => createSelector(selectWeather,selectFavorites,(state:State,favs)=>{
+    for(let loc of favs){
+      if(loc.id === id){
+        return true;
+      }
+    }
+    //if its none of the favorite locations
+    return false;    
+  });

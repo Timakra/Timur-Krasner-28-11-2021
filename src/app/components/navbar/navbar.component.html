@@ -1,5 +1,5 @@
 <nav>
     <a href="#" aria-label="home page" routerLink="">Home</a>
     <a href="#" aria-label="favorite locations" routerLink="fav">Favorites</a>
-    <a href="#" (click)="switchUnit()">Switch To {{ unit==="C"?"F":"C" }}</a>
+    <a class="switch-btn" (click)="switchUnit()">Switch To {{ unit==="C"?"F":"C" }}</a>
 </nav>

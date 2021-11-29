@@ -1,13 +1,14 @@
 <h2>
-    {{location.name}} 
+    {{location.name}} / {{ currentWeather.tempMax | tempeture }}
     <a href="#" (click)="toggleFavorites()">
         <img class="icon" src="\assets\feature-icons\not-fav.png" alt="" srcset="" *ngIf="!locationIsFav">
         <img class="icon" src="\assets\feature-icons\fav.png" alt="" srcset="" *ngIf="locationIsFav">
     </a>
 </h2>
-
-<div *ngIf="loading">Loading</div>
-
+<h2>
+    <img [src]="'assets/weather-icons/'+ currentWeather.icon +'-s.png'" alt="">
+    {{currentWeather.iconPhrase}}
+</h2>
 <div class="card-grid">
     <div *ngFor="let forecast of fiveDayForecast">
         {{forecast.date | date:'EEEE'}}

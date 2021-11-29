@@ -23,13 +23,13 @@ export class WeatherapiService {
         "LocalObservationDateTime": "2021-11-29T10:41:00+02:00",
         "EpochTime": 1638175260,
         "WeatherText": "Mostly sunny",
-        "WeatherIcon": 2,
+        "WeatherIcon": Math.round(1 + 8 * Math.random()),
         "HasPrecipitation": false,
         "PrecipitationType": null,
         "IsDayTime": true,
         "Temperature": {
           "Metric": {
-            "Value": 23.9,
+            "Value": Math.round(30 * Math.random()),
             "Unit": "C",
             "UnitType": 17
           },

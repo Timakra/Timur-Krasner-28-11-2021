@@ -67,7 +67,8 @@ export class SearchComponent implements OnInit {
     console.log('click' , location)
     this.store.dispatch(changeSelectedLocation(location))
     this.search.setValue(location.name);
-    //Unfocus
+    
+    //Unfocus from search box
     var tmp = document.createElement("input");
     document.body.appendChild(tmp);
     tmp.focus();

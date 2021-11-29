@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { WeatherLocation } from 'src/app/models/weather.model';
+import { Forecast, WeatherLocation } from 'src/app/models/weather.model';
+import { WeatherapiService } from 'src/app/services/weatherapi.service';
 import { changeSelectedLocation } from 'src/app/state/actions/weather.actions';
 
 @Component({
@@ -11,13 +12,16 @@ import { changeSelectedLocation } from 'src/app/state/actions/weather.actions';
 })
 export class FavCardComponent implements OnInit {
   @Input() location! : WeatherLocation;
-  constructor(private store : Store,private router : Router) { }
+  currentForecast! :Forecast;
+  constructor(private weatherApi: WeatherapiService,private store : Store,private router : Router) { }
 
   ngOnInit(): void {
+    this.weatherApi.getCurrentWeather(this.location.id).subscribe((forecast)=>{
+      this.currentForecast = forecast;
+    })
   }
 
   routeToMain(){
-    console.log("route to main")
     this.store.dispatch(changeSelectedLocation(this.location));
     this.router.navigate(['']);
   }

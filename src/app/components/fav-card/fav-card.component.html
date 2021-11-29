@@ -1,3 +1,7 @@
 <div tabindex="0" (click)="routeToMain()" class="container">
     <h3>{{location.name}}</h3>
+        <img [src]="'assets/weather-icons/' + currentForecast.icon + '-s.png'" alt="" srcset="">
+    <p>
+        {{currentForecast.tempMax | tempeture}}
+    </p>
 </div>

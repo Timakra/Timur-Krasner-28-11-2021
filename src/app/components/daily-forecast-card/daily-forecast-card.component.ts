@@ -10,7 +10,6 @@ export class DailyForecastCardComponent implements OnInit {
   
 
   @Input() forecast! : Forecast;
-  @Input() locationId : string = "";
 
   constructor() { }
 

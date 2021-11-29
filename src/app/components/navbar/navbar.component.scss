@@ -1,4 +1,7 @@
 nav{
     display: flex;
     justify-content: space-around;
+    .switch-btn{
+        cursor: pointer;
+    }
 }

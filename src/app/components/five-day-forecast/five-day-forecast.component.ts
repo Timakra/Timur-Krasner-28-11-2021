@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Forecast, WeatherLocation } from 'src/app/models/weather.model';
 import { WeatherapiService } from 'src/app/services/weatherapi.service';
-import { selectFavorites, selectSelectedLocation } from 'src/app/state/reducers/weather.reducer';
+import { isInFavorites , selectSelectedLocation } from 'src/app/state/reducers/weather.reducer';
 import { removeFavorite,addFavorite } from 'src/app/state/actions/weather.actions'
 
 @Component({
@@ -15,7 +15,7 @@ export class FiveDayForecastComponent implements OnInit {
   locationIsFav :boolean = false;
   location! :WeatherLocation;
   fiveDayForecast! : Forecast[];
-
+  currentWeather! :Forecast;
 
   constructor(private store :Store,private weatherApi : WeatherapiService) {
   }
@@ -24,6 +24,11 @@ export class FiveDayForecastComponent implements OnInit {
     this.store.select(selectSelectedLocation).subscribe((loc)=>{
       this.location = loc;
 
+      //get current weather
+      this.weatherApi.getCurrentWeather(this.location.id).subscribe((currentWeather)=>{
+        this.currentWeather = currentWeather;
+      })
+      
       //gets 5 day forecast
       this.weatherApi.getWeatherFiveDayForecast(this.location.id).subscribe((forecast)=>{
         this.fiveDayForecast = forecast;
@@ -31,16 +36,8 @@ export class FiveDayForecastComponent implements OnInit {
       })
       
       // Checks if location is in Favorites
-      this.store.select(selectFavorites).subscribe((favs)=>{
-        for(let loc of favs){
-          if(loc.id === this.location.id){
-            this.locationIsFav = true;;
-            return;
-          }
-        }
-        //if its none of the favorite locations
-        this.locationIsFav = false;
-        
+      this.store.select(isInFavorites(this.location.id)).subscribe((inFavs)=>{
+        this.locationIsFav = inFavs;       
       })
     })
 

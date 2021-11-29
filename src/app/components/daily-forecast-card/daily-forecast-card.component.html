@@ -1,8 +1,9 @@
 <div class="card">
+    <h4>{{forecast.iconPhrase}}</h4>
     <span class="icon">
         <img [src]="'assets/weather-icons/' + forecast.icon + '-s.png'" alt="" srcset="">
     </span>
     <span class="temp">
-        {{forecast.tempMin | tempeture }} / {{forecast.tempMax | tempeture}} 
+        {{forecast.tempMin | tempeture }} / {{forecast.tempMax | tempeture }} 
     </span>
 </div>

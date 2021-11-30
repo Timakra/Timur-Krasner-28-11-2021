@@ -1,10 +1,60 @@
-.card-grid{
+.container {
+  background-color: var(--clr-light-grey);
+  color: var(--clr-dark);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  .current-weather {
+    justify-self: center;
+    align-self: center;
     display: grid;
-    text-align: center;
-    grid-template-columns: repeat(5,1fr);
-    gap: 2rem;
-}
+    max-width: max-content;
+    grid-template-columns: 50px repeat(2, 1fr) 50px;
+    gap: 1rem 0;
+    grid-template-areas:
+      'tempName tempName tempName tempName'
+      'weatherIcon date date favIcon'
+      'weatherIcon date date favIcon';
+    & > * {
+      justify-self: center;
+      align-self: center;
+    }
+    .weather-icon {
+      justify-self: center;
+      grid-area: weatherIcon;
+    }
+    .temp-name {
+      font-size: 2rem;
+      grid-area: tempName;
+      justify-content: start;
+    }
+    .date {
+      grid-area: date;
+    }
+    .fav-icon {
+      grid-area: favIcon;
+    }
+  }
 
-.icon{
+  .card-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+  .card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .week-day {
+      font-size: 1.25rem;
+    }
+  }
+
+  .icon {
     width: 1.875rem;
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, of, first ,tap} from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Forecast } from '../models/weather.model';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class WeatherapiService {
         "LocalObservationDateTime": "2021-11-29T10:41:00+02:00",
         "EpochTime": 1638175260,
         "WeatherText": "Mostly sunny",
-        "WeatherIcon": Math.round(1 + 8 * Math.random()),
+        "WeatherIcon": Math.round(1 + 7 * Math.random()),
         "HasPrecipitation": false,
         "PrecipitationType": null,
         "IsDayTime": true,

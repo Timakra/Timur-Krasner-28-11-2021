@@ -1,5 +1,11 @@
-main{
+.container{
+  height: 100%;
+  main {
+    padding-top:5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    background-color: var(--clr-light);
+    height: 100%;
 }
+}
+

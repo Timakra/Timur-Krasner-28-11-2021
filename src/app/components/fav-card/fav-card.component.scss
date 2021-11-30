@@ -1,7 +1,38 @@
-.container{
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 10rem;
+.container {
+  background-color: var(--clr-light-grey);//radial-gradient( var(--clr-light-grey)60%, var(--clr-dark-grey)  110%);
+  color: var(--clr-dark);
+  justify-self: center;
+  border-radius: 5px;
+  display: grid;
+  grid-template-areas:
+    'name name'
+    'temp icon'
+    'phrase phrase';
+  width: 10rem;
+  height: 10rem;
+  padding: 1rem;
+  cursor: pointer;
+  .name {
+    overflow-wrap: break-word;
+    max-height: 1.2rem;
+    overflow-y: hidden;
+    grid-area: name;
+    text-align: center;
+    justify-self: center;
+  }
+  .temp {
+    grid-area: temp;
+    align-self: center;
+    justify-self: end;
+  }
+  .icon {
+    justify-self: start;
+    grid-area: icon;
+    align-self: center;
+  }
+  .phrase {
+    grid-area: phrase;
+    text-align: center;
+    justify-self: center;
+  }
 }

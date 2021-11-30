@@ -1,17 +1,38 @@
-<h2>
-    {{location.name}} / {{ currentWeather.tempMax | tempeture }}
-    <a href="#" (click)="toggleFavorites()">
-        <img class="icon" src="\assets\feature-icons\not-fav.png" alt="" srcset="" *ngIf="!locationIsFav">
-        <img class="icon" src="\assets\feature-icons\fav.png" alt="" srcset="" *ngIf="locationIsFav">
-    </a>
-</h2>
-<h2>
-    <img [src]="'assets/weather-icons/'+ currentWeather.icon +'-s.png'" alt="">
-    {{currentWeather.iconPhrase}}
-</h2>
-<div class="card-grid">
-    <div *ngFor="let forecast of fiveDayForecast">
-        {{forecast.date | date:'EEEE'}}
-        <app-daily-forecast-card [forecast]="forecast" ></app-daily-forecast-card>
+<div class="container">
+  <div class="current-weather">
+    <img
+      class="weather-icon"
+      [src]="'assets/weather-icons/' + currentWeather.icon + '-s.png'"
+      alt=""
+    />
+    <span class="temp-name">
+      {{ location.name }} - {{ currentWeather.tempMax | tempeture }}
+    </span>
+    <span class="date">
+      {{ date | date: 'EEEE' }} - {{ currentWeather.iconPhrase }}
+    </span>
+    <span (click)="toggleFavorites()" class="fav-icon">
+      <img
+        class="icon"
+        src="\assets\feature-icons\not-fav.png"
+        alt="Location is not in favorite,click to add"
+        *ngIf="!locationIsFav"
+      />
+      <img
+        class="icon"
+        src="\assets\feature-icons\fav.png"
+        alt="Location is in favorite,click to remove"
+        *ngIf="locationIsFav"
+      />
+    </span>
+  </div>
+
+  <div class="card-grid">
+    <div class="card" *ngFor="let forecast of fiveDayForecast">
+      <span class="week-day">
+        {{ forecast.date | date: 'EEEE' }}
+      </span>
+      <app-daily-forecast-card [forecast]="forecast"></app-daily-forecast-card>
     </div>
+  </div>
 </div>

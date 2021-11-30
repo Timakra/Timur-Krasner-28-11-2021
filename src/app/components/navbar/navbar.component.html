@@ -1,5 +1,16 @@
 <nav>
-    <a href="#" aria-label="home page" routerLink="">Home</a>
-    <a href="#" aria-label="favorite locations" routerLink="fav">Favorites</a>
-    <a class="switch-btn" (click)="switchUnit()">Switch To {{ unit==="C"?"F":"C" }}</a>
+  <span class="left">
+    <a class="btn" href="#" aria-label="home page" routerLink="">Home</a>
+  </span>
+  <span class="right">
+    <a class="btn" href="#" aria-label="favorite locations" routerLink="fav"
+      >Favorites</a
+    >
+    <a class="btn switch-btn" (click)="switchUnit()"
+      >Switch To {{ unit === 'C' ? 'F' : 'C' }}</a
+    >
+    <a class="btn switch-btn" (click)="switchTheme()"
+      >Switch To {{ theme === 'light-theme' ? 'Dark' : 'Light' }}</a
+    >
+  </span>
 </nav>

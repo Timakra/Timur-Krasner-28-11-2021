@@ -1,8 +1,18 @@
-.card{
-    display: flex;
-    flex-direction: column;
-    height: 10rem;
-    justify-content: center;
-    border: 1px solid black;
-
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0;
+  border-radius: 8px;
+  height: 10rem;
+  min-width: 10rem;
+  background-color: var(--clr-primary);
+  color: var(--clr-dark);
+  .icon-phrase {
+    font-size: 1.25rem;
+  }
+  .icon {
+  }
+  .temp {
+  }
 }

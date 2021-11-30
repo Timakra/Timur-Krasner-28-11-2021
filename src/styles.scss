@@ -1,4 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
 
-html, body { height: 100%;box-sizing: border-box; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Add application styles & imports to this file! */
+body,
+html {
+  font-family: 'Raleway', sans-serif;
+  padding: 0;
+  margin:0;
+}
+html{
+  height: 100vh;
+  body{
+    height: 100%;
+  }
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.light-theme, :root{
+  --clr-primary: #5FBFF9;
+  --clr-secondary: #0CCA4A;
+  --clr-dark: hsl(170, 12%, 10%);
+  --clr-light: #F4EBD9;
+  --clr-light-grey: #929085;
+  --clr-dark-grey: #555;
+}
+.dark-theme{
+  --clr-light: #171D1C;
+  --clr-dark: white;  
+  --clr-primary: #307473;
+  --clr-secondary: #5fbef9d5;
+  --clr-dark-grey: #bbb;
+  --clr-light-grey: #555;
+}
+.btn {
+  --btn-bgcolor: var(--clr-light);
+  --btn-border-color: var(--clr-primary);
+  --btn-color: var(--clr-dark);
+  background-color: var(--btn-bgcolor);
+  text-decoration: none;
+  color: var(--btn-color);
+  border-radius: 5px;
+  border: 2px solid var(--btn-border-color);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0.25rem;
+  cursor: pointer;
+  *::selection {
+    background-color: Transparent;
+  }
+}

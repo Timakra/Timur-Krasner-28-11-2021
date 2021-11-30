@@ -1,6 +1,36 @@
-.container{
-    margin: 5rem;
-    display:grid;
-    grid-template-columns: repeat(3,1fr);
-    gap:1rem;
+.container {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  max-width: 95vw;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  * > {
+    justify-self: center;
+  }
+}
+
+@media only screen and (min-width: 22rem) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 33rem) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (min-width: 44rem) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media only screen and (min-width: 59rem) {
+  .container {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

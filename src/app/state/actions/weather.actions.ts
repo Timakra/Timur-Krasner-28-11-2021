@@ -1,21 +1,23 @@
-import { createAction ,props } from "@ngrx/store";
-import { WeatherLocation } from "src/app/models/weather.model";
-
+import { createAction, props } from '@ngrx/store';
+import { WeatherLocation } from '../../models/weather.model';
 
 export const addFavorite = createAction(
-    "[Weather] Add Favorite",
-    props<WeatherLocation>()
+  '[Weather] Add Favorite',
+  props<WeatherLocation>()
 );
 
 export const removeFavorite = createAction(
-    "[Weather] Remove Favorite",
-    props<WeatherLocation>()
+  '[Weather] Remove Favorite',
+  props<WeatherLocation>()
 );
 
 export const changeSelectedLocation = createAction(
-    "[Weather] Changed Selected Location",
-    props<WeatherLocation>()
+  '[Weather] Changed Selected Location',
+  props<WeatherLocation>()
 );
-export const switchUnit = createAction(
-    "[Weather] Switch Temputere unit"
+
+export const switchTheme = createAction(
+  '[App] Switch theme'
 );
+
+export const switchUnit = createAction('[Weather] Switch Temputere unit');

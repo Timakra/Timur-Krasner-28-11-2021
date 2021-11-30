@@ -13,9 +13,12 @@ export interface State {
   selectedLocation: WeatherLocation;
   tempUnit: 'C' | 'F';
   theme : "dark-theme" | "light-theme";
+  userLocation? : GeolocationPosition;
+  selectedLocationChanged: boolean;
 }
 
 export const initialState: State = {
+  selectedLocationChanged : false,
   tempUnit: 'C',
   theme: "light-theme",
   favorites: [
@@ -93,9 +96,13 @@ export const weatherReducer = createReducer(
     WeatherActions.changeSelectedLocation,
     (state: State, location: WeatherLocation) => ({
       ...state,
+      selectedLocationChanged: true,
       selectedLocation: location,
-    })
+    }),
   ),
+  on(WeatherActions.userLocationLoaded,(state,loc)=>{
+    return {...state,userLocation:loc}
+  }),
   on(WeatherActions.switchUnit, (state: State) => ({
     ...state,
     tempUnit: state.tempUnit === 'C' ? 'F' : 'C' as 'C' | 'F',
@@ -108,22 +115,32 @@ export const weatherReducer = createReducer(
 
 //Selectors
 export const selectWeather = createFeatureSelector<State>('weather');
+
 export const selectSelectedLocation = createSelector(
   selectWeather,
   (state: State) => state.selectedLocation
 );
+
+export const selectSelectedChanged = createSelector(
+  selectWeather,
+  (state: State) => state.selectedLocationChanged
+);
+
 export const selectTempUnit = createSelector(
   selectWeather,
   (state: State) => state.tempUnit
 );
+
 export const selectTheme = createSelector(
   selectWeather,
   (state: State) => state.theme
 );
+
 export const selectFavorites = createSelector(
   selectWeather,
   (state: State) => state.favorites
 );
+
 export const isInFavorites = (id: string) =>
   createSelector(selectWeather, selectFavorites, (state: State, favs) => {
     for (let loc of favs) {

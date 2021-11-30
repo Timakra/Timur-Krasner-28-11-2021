@@ -16,6 +16,11 @@ export const changeSelectedLocation = createAction(
   props<WeatherLocation>()
 );
 
+export const userLocationLoaded = createAction(
+  '[Weather] User Location Loaded',
+  props<GeolocationPosition>()
+);
+
 export const switchTheme = createAction(
   '[App] Switch theme'
 );

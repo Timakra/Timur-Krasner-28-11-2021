@@ -47,7 +47,6 @@ export class AppComponent implements OnDestroy {
 
     //Gets user location
     navigator.geolocation.getCurrentPosition((loc)=>{
-      console.log(loc.coords);
       this.weatherApi.getLocationByGeo(loc).subscribe(location=>{
         if(this.locationChanged) return;
         this.store.dispatch(changeSelectedLocation(location));

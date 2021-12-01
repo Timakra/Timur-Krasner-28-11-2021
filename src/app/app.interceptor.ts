@@ -20,15 +20,14 @@ export class AppInterceptor implements HttpInterceptor {
                 catchError((error: HttpErrorResponse) => {
                     let errorMsg = '';
                     if (error.error instanceof ErrorEvent) {
-
-                        console.log('this is client side error');
+                        //Client side
                         this.dispatchError(`Something went wrong - Please try agian`);
                     }
                     else {
+                        //server side error
                         errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
                         this.dispatchError(`Api Server Error`);
                     }
-                    console.log(errorMsg);
                     throw errorMsg;
                 })
             )

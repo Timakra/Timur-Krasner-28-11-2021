@@ -17,7 +17,6 @@ export class FavoriteLocationsComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     let selectFavsSub = this.store.select(selectFavorites).subscribe((favs) => {
       this.favorites = favs;
-      console.log(favs);
     });
     this.subs.push(selectFavsSub);
   }

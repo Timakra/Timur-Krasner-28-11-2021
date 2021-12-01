@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { WeatherapiService } from '../../services/weatherapi.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { WeatherLocation } from '../../models/weather.model';
-import { map, Subscription } from 'rxjs';
+import { debounceTime, Subscription } from 'rxjs';
 
 import { changeSelectedLocation, displayError } from './../../state/actions/weather.actions';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 })
 export class SearchComponent implements OnInit,OnDestroy {
   @ViewChild('searchBox') searchBox!: ElementRef;
-
+  searchDbouncetime:number = 400;
   constructor(
     private weatherApi: WeatherapiService,
     private fb: FormBuilder,
@@ -30,7 +30,8 @@ export class SearchComponent implements OnInit,OnDestroy {
   ]);
 
   ngOnInit(): void {
-    let searchFieldSub = this.search.valueChanges.subscribe((value) => {
+
+    let searchFieldSub = this.search.valueChanges.pipe(debounceTime(this.searchDbouncetime)).subscribe((value) => {
       if (value) {
         this.inputHasString = true;
       } else {
@@ -38,14 +39,15 @@ export class SearchComponent implements OnInit,OnDestroy {
       }
       if(this.inputHasString && this.search.invalid){
         this.store.dispatch(displayError({msg:"Enter a location using only English letters"}))
+      }else{
+        this.searchLocation(null);
       }
     });
     this.subs.push(searchFieldSub);
   }
 
-  searchLocation(e: Event) {
-    e.preventDefault();
-    console.log('SUBMIT');
+  searchLocation(e: Event|null) {
+    if(e)e.preventDefault();
     let queryString: string = this.search.value;
     //removes spaces around the string and double(or more) spaces
     let trimmedQuery = queryString

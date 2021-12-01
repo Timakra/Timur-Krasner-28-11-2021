@@ -82,6 +82,7 @@ export class WeatherapiService {
     if(environment.production){
      api = this.http.get(`${this.baseUrl}/locations/v1/cities/geoposition/search?apikey=${this.apiKey}&q=${loc.coords.latitude}%2C${loc.coords.longitude}`)
     }
+    
     return api.pipe(
       map((res) => {
         return {

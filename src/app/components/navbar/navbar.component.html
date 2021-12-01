@@ -1,16 +1,16 @@
 <nav>
   <span class="left">
-    <a class="btn" href="#" aria-label="home page" routerLink="">Home</a>
+    <img class="logo" [routerLink]="''" src="assets/feature-icons/logo.png" alt="">
   </span>
   <span class="right">
-    <a class="btn" href="#" aria-label="favorite locations" routerLink="fav"
-      >Favorites</a
+    <a class="btn" href="#" aria-label="home page" routerLink="" *ngIf="!(router.url === '/')">Home</a>
+    <a class="btn" href="#" aria-label="favorite locations" routerLink="fav" *ngIf="!(router.url === '/fav')">Favorites</a
     >
     <a class="btn switch-btn" (click)="switchUnit()"
-      >Switch To {{ unit === 'C' ? 'F' : 'C' }}</a
+      >To {{ unit === 'C' ? 'F°' : 'C°' }}</a
     >
     <a class="btn switch-btn" (click)="switchTheme()"
-      >Switch To {{ theme === 'light-theme' ? 'Dark' : 'Light' }}</a
+      >{{ theme === 'light-theme' ? 'Dark' : 'Light' }} Theme</a
     >
   </span>
 </nav>

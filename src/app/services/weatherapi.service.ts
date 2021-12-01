@@ -9,7 +9,7 @@ import { Forecast, WeatherLocation } from '../models/weather.model';
 })
 export class WeatherapiService {
 
-  apiKey: string = 'UeioGAFGTGqlO2VUyKf93p6y73Slbcte';
+  apiKey: string = 'Dv41BOIBRQIl423G03y7HajJDq0a7kMg';
   baseUrl: string = 'https://dataservice.accuweather.com'
 
   constructor(

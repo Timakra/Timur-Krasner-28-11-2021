@@ -1,17 +1,16 @@
 .container {
   margin-top: 1.5rem;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 11rem;
+  grid-auto-columns: auto;
   place-items: center;
   max-width: 95vw;
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  * > {
-    justify-self: center;
-  }
 }
 
+// // Responsive grid layout
 @media only screen and (min-width: 22rem) {
   .container {
     grid-template-columns: 1fr 1fr;

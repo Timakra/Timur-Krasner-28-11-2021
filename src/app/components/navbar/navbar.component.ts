@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { switchUnit ,switchTheme} from '../../state/actions/weather.actions';
@@ -13,7 +14,9 @@ export class NavbarComponent implements OnInit,OnDestroy {
   unit!: 'C' | 'F';
   theme!: 'light-theme'|'dark-theme';
   subs :Subscription[]= [];
-  constructor(private store: Store) {}
+  constructor(private store: Store,public router :Router) {
+
+  }
 
   ngOnInit(): void {
     let tempUnitSub = this.store.select(selectTempUnit).subscribe((unit) => {

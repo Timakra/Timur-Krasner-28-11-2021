@@ -56,12 +56,14 @@ export class SearchComponent implements OnInit,OnDestroy {
     if (trimmedQuery && this.search.valid) {
       this.loading = true;
       let querySub = this.weatherApi.getAutoComplete(trimmedQuery)
-        .subscribe((locations) => {
+        .subscribe({
+          next:(locations) => {
           this.currentQueryResults = locations;
           this.currentQueryString = trimmedQuery;
           this.loading = false;
-        },(e)=>{this.loading= false;return e}
-        )
+        },
+          error:(e)=>{this.loading= false;return e}
+        })
         this.subs.push(querySub);
     }
 

@@ -12,10 +12,12 @@ import { changeSelectedLocation } from '../../state/actions/weather.actions';
   styleUrls: ['./fav-card.component.scss'],
 })
 export class FavCardComponent implements OnInit ,OnDestroy{
+  
   @Input() location!: WeatherLocation;
   loading: boolean = true;
   currentForecast!: Forecast;
   subs: Subscription[] = [];
+
   constructor(
     private weatherApi: WeatherapiService,
     private store: Store,

@@ -2,6 +2,12 @@
     <header>
         <app-navbar></app-navbar>
     </header>
+    <div class="error-toast" >
+        <span [class.display]="displayError" class="toast">
+            {{errorMsg}}
+            <a (click)="this.displayError = false" tab-index="0" aria-label="close error message" class="close">&#10006;</a>
+        </span>
+    </div>
     
     <main>
         <router-outlet></router-outlet>

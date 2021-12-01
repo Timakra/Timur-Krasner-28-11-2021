@@ -4,6 +4,7 @@ import {
   on,
   createSelector,
 } from '@ngrx/store';
+import { ErrorMsg } from 'src/app/models/app.model';
 import { WeatherLocation } from '../../models/weather.model';
 
 import * as WeatherActions from '../actions/weather.actions';
@@ -15,6 +16,7 @@ export interface State {
   theme : "dark-theme" | "light-theme";
   userLocation? : GeolocationPosition;
   selectedLocationChanged: boolean;
+  lastError?: ErrorMsg;
 }
 
 export const initialState: State = {
@@ -25,51 +27,7 @@ export const initialState: State = {
     {
       name: 'Tel aviv ,Israel',
       id: '215854',
-    },
-    {
-      id: '169072',
-      name: 'Telavi ,Georgia',
-    },
-    {
-      id: '3453754',
-      name: 'Telaga Asih ,Indonesia',
-    },
-    {
-      name: 'Tel aviv ,Israel',
-      id: '215854',
-    },
-    {
-      id: '169072',
-      name: 'Telavi ,Georgia',
-    },
-    {
-      id: '3453754',
-      name: 'Telaga Asih ,Indonesia',
-    },
-    {
-      name: 'Tel aviv ,Israel',
-      id: '215854',
-    },
-    {
-      id: '169072',
-      name: 'Telavi ,Georgia',
-    },
-    {
-      id: '3453754',
-      name: 'Telaga Asih ,Indonesia',
-    },
-    {
-      name: 'Tel aviv ,Israel',
-      id: '215854',
-    },
-    {
-      id: '169072',
-      name: 'Telavi ,Georgia',
-    },
-    {
-      id: '3453754',
-      name: 'Telaga Asih ,Indonesia',
-    },
+    }
   ],
   selectedLocation: { name: 'Tel aviv ,Israel', id: '215854' },
 };
@@ -110,7 +68,10 @@ export const weatherReducer = createReducer(
   on(WeatherActions.switchTheme, (state: State) => ({
     ...state,
     theme: state.theme === 'light-theme' ? 'dark-theme': 'light-theme'  as "dark-theme" | "light-theme",
-  }))
+  })),
+  on(WeatherActions.displayError,(state:State,errorMsg:ErrorMsg)=>{
+    return {...state,lastError:errorMsg}
+  })
 );
 
 //Selectors
@@ -139,6 +100,11 @@ export const selectTheme = createSelector(
 export const selectFavorites = createSelector(
   selectWeather,
   (state: State) => state.favorites
+);
+
+export const selectErrorMsg = createSelector(
+  selectWeather,
+  (state: State) => state.lastError
 );
 
 export const isInFavorites = (id: string) =>

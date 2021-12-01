@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!loading && currentWeather && fiveDayForecast">
   <div class="current-weather">
     <img
       class="weather-icon"
@@ -6,14 +6,14 @@
       alt=""
     />
     <span class="temp-name">
-      {{ location.name }} - {{ currentWeather.tempMax | tempeture }}
+      {{ location.name }} {{ currentWeather.tempMax | tempeture }}
     </span>
     <span class="date">
       {{ date | date: 'EEEE' }} - {{ currentWeather.iconPhrase }}
     </span>
     <span (click)="toggleFavorites()" class="fav-icon">
       <img
-        class="icon"
+        class="icon not-fav-img"
         src="\assets\feature-icons\not-fav.png"
         alt="Location is not in favorite,click to add"
         *ngIf="!locationIsFav"
@@ -24,6 +24,7 @@
         alt="Location is in favorite,click to remove"
         *ngIf="locationIsFav"
       />
+      <span [class.fav]="locationIsFav" [class.not-fav]="!locationIsFav"></span>
     </span>
   </div>
 
@@ -36,3 +37,5 @@
     </div>
   </div>
 </div>
+
+<span class="loading" *ngIf="loading"></span>

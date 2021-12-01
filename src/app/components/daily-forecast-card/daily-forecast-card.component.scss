@@ -10,6 +10,8 @@
   color: var(--clr-dark);
   .icon-phrase {
     font-size: 1.25rem;
+    word-break: break-word;
+    max-width: 10rem;
   }
   .icon {
   }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 //Pipes
 import { TemperaturePipe } from './pipes/tempeture.pipe'
@@ -19,6 +19,7 @@ import { DailyForecastCardComponent } from './components/daily-forecast-card/dai
 import { HomeComponent } from './components/home/home.component';
 import { FiveDayForecastComponent } from './components/five-day-forecast/five-day-forecast.component';
 import { FavCardComponent } from './components/fav-card/fav-card.component';
+import { AppInterceptor } from './app.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { FavCardComponent } from './components/fav-card/fav-card.component';
     }),
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AppInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,12 +1,14 @@
 <form (submit)="searchLocation($event)">
   <div class="search-box" [class.empty]="!currentQueryResults.length">
     <span [class.has-query]="inputHasString" class="input-wraper">
+      <span class="loading" *ngIf="loading"></span>
       <input
         #searchBox
         autocomplete="off"
         type="text"
         name="search"
         [formControl]="search"
+        [class.error]="search.invalid"
         aria-label="Search for location"
       />
     </span>

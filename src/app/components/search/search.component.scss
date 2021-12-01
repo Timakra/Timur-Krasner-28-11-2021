@@ -9,6 +9,13 @@ form {
     flex-direction: column;
     .input-wraper {
       width: 100%;
+      .loading{
+        --loading-size: 1rem;
+        position: absolute;
+        z-index: 10;
+        top:calc(50% - 0.5rem);
+        left: 0.75rem;
+      }
       input {
         width: 100%;
         outline: 2px solid var(--clr-dark);
@@ -17,11 +24,14 @@ form {
         position: relative;
         background-color: var(--clr-light-grey);
         border-radius: 5px;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 2.2rem;
+        &.error{
+          outline: 2px solid red;
+        }
       }
       &:focus-within {
         &::after {
-          width: calc(100% - 2rem);
+          width: calc(100% - 4.4rem);
         }
         &:before {
           opacity: 0;
@@ -36,7 +46,7 @@ form {
         content: 'Search';
         transition:  opacity 300ms ease-in;
         position: absolute;
-        left: 1rem;
+        left: 2.2rem;
         top: 0.5rem;
         font-size: 0.875rem;
         z-index: 1;
@@ -49,7 +59,7 @@ form {
         height: 3px;
         width: 0px;
         bottom: 3px;
-        left: 1rem;
+        left: 2.2rem;
         background-color: var(--clr-primary);
       }
     }

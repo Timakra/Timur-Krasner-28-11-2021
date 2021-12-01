@@ -33,6 +33,7 @@ html{
   --clr-secondary: #5fbef9d5;
   --clr-dark-grey: #bbb;
   --clr-light-grey: #555;
+  .icon.not-fav-img{filter: invert(1);}
 }
 .btn {
   --btn-bgcolor: var(--clr-light);
@@ -48,5 +49,25 @@ html{
   cursor: pointer;
   *::selection {
     background-color: Transparent;
+  }
+}
+
+.loading{
+  --loading-size: 10rem;
+  width: var(--loading-size);
+  height: var(--loading-size);
+  display: block;
+  border-radius: 100vmax;
+  border: calc(var(--loading-size) / 5) solid var(--clr-primary);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  animation: rotate360 700ms ease infinite;
+}
+@keyframes rotate360{ 
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
   }
 }

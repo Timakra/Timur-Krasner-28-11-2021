@@ -2,13 +2,15 @@
   <span class="name">
     {{ location.name }}
   </span>
-  <span class="temp">
+  <span class="temp" *ngIf="!loading">
     {{ currentForecast.tempMax | tempeture }}
   </span>
+  <span class="loading" *ngIf="loading"></span>
   <img
     class="icon"
     [src]="'assets/weather-icons/' + currentForecast.icon + '-s.png'"
     [alt]="currentForecast.iconPhrase"
+     *ngIf="!loading"
   />
-  <span class="phrase"> {{ currentForecast.iconPhrase }} </span>
+  <span class="phrase" *ngIf="!loading"> {{ currentForecast.iconPhrase }} </span>
 </div>

@@ -12,7 +12,7 @@
     display: grid;
     max-width: max-content;
     grid-template-columns: 50px repeat(2, 1fr) 50px;
-    gap: 1rem 0;
+    gap: 1rem;
     grid-template-areas:
       'tempName tempName tempName tempName'
       'weatherIcon date date favIcon'
@@ -35,6 +35,26 @@
     }
     .fav-icon {
       grid-area: favIcon;
+      cursor: pointer;
+      position: relative;
+      .fav,.not-fav{
+        z-index: 2;
+        width: 100%;
+        color: var(--clr-dark);
+        bottom: -0.3rem;
+        left: -0.3rem;
+        text-align: start;
+        font-size: 3rem;
+        line-height: 1.8rem;;
+        position: absolute;
+        height: 100%;
+      }
+      .fav::before{
+        content: "\2212";
+      }
+      .not-fav::before{
+        content: "+";
+      }
     }
   }
 
@@ -57,4 +77,9 @@
   .icon {
     width: 1.875rem;
   }
+}
+
+.loading{
+  margin-top : 5rem;
+  --loading-size : 30vmin;
 }

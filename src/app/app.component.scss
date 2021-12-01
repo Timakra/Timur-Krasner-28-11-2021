@@ -5,7 +5,48 @@
     display: flex;
     justify-content: center;
     background-color: var(--clr-light);
-    height: 100%;
-}
+    min-height: 100%;
+  }
+  .error-toast{
+    position: fixed;
+    z-index:1000;
+    top: 3.5rem;
+    left:0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    .toast{
+      font-size: min(1rem, 2vw);
+      max-width:90vw;
+      max-height: 3rem;
+      word-wrap: none;
+      padding: 0.3rem;
+      line-height: 1.4rem;
+      color: var(--clr-light-grey);
+      border: 0.1rem solid red;
+      border-radius: 5px;
+      background-color: var(--clr-dark-grey);
+      transform: translateX(100vw);
+      opacity: 0;
+      transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+      .close{
+        cursor: pointer;
+        margin-left:2rem;
+        border: 0.1rem var(--clr-light-grey) solid;
+        font-size:1rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        text-align: center;
+        border-radius: 100vmax;
+        float: right;
+        line-height: 1.4rem;
+      }
+      &.display{
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+  }
 }
 

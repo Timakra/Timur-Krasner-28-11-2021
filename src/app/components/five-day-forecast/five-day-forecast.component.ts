@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Forecast, WeatherLocation } from '../../models/weather.model';
 import { WeatherapiService } from '../../services/weatherapi.service';
@@ -10,14 +10,16 @@ import {
   removeFavorite,
   addFavorite,
 } from '../../state/actions/weather.actions';
+import { catchError, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-five-day-forecast',
   templateUrl: './five-day-forecast.component.html',
   styleUrls: ['./five-day-forecast.component.scss'],
 })
-export class FiveDayForecastComponent implements OnInit {
+export class FiveDayForecastComponent implements OnInit,OnDestroy {
   loading: boolean = true;
+  subs: Subscription[] = [];
   locationIsFav: boolean = false;
   location!: WeatherLocation;
   fiveDayForecast!: Forecast[];
@@ -27,29 +29,42 @@ export class FiveDayForecastComponent implements OnInit {
   constructor(private store: Store, private weatherApi: WeatherapiService) {}
 
   ngOnInit(): void {
-    this.store.select(selectSelectedLocation).subscribe((loc) => {
+    let selectedLocationSub = this.store.select(selectSelectedLocation).subscribe((loc) => {
       this.location = loc;
 
       //get current weather
-      this.weatherApi
+      let currrentWeatherSub = this.weatherApi
         .getCurrentWeather(this.location.id)
-        .subscribe((currentWeather) => {
+        .subscribe({
+          next:(currentWeather) => {
           this.currentWeather = currentWeather;
-        });
+          if(!this.fiveDayForecast) return;
+          this.loading = false;
+        },
+          error:(e)=>{this.loading= false;return e}}
+        );
 
       //gets 5 day forecast
-      this.weatherApi
+      let fiveDaySub = this.weatherApi
         .getWeatherFiveDayForecast(this.location.id)
-        .subscribe((forecast) => {
+        .subscribe({
+          next:(forecast) => {
           this.fiveDayForecast = forecast;
+          if(!this.currentWeather) return;
           this.loading = false;
+          },
+          error:(e)=>{this.loading= false;return e}
         });
 
       // Checks if location is in Favorites
-      this.store.select(isInFavorites(this.location.id)).subscribe((inFavs) => {
+      let inFavSub = this.store.select(isInFavorites(this.location.id)).subscribe((inFavs) => {
         this.locationIsFav = inFavs;
       });
+      this.subs.push(currrentWeatherSub,fiveDaySub,inFavSub);
+
     });
+    this.subs.push(selectedLocationSub);
+
   }
 
   toggleFavorites() {
@@ -58,5 +73,8 @@ export class FiveDayForecastComponent implements OnInit {
     } else {
       this.store.dispatch(addFavorite(this.location));
     }
+  }
+  ngOnDestroy(){
+    this.subs.forEach(sub=>sub.unsubscribe());
   }
 }
